@@ -1,0 +1,591 @@
+# ==================================================
+# PROYECTO: CAJERO AUTOMÁTICO
+# Lenguaje: Python
+#
+# Objetivo:
+# Simular un cajero automático donde el usuario
+# puede consultar saldo, depositar, retirar,
+# transferir, pagar servicios y realizar otras
+# operaciones bancarias.
+# ==================================================
+
+
+
+# -----------------------------
+# Datos iniciales
+# -----------------------------
+
+saldo = 1000
+
+numero_cuenta = "123456"
+
+password = "1234"
+
+
+# Historial de movimientos
+historial = [
+    "Saldo inicial: $1000"
+]
+
+
+# Control del programa
+continuar = True
+
+
+
+# -----------------------------
+# Inicio del cajero
+# -----------------------------
+
+print("===== CAJERO AUTOMÁTICO =====")
+
+
+# Ingreso de tarjeta
+
+tarjeta = input(
+    "Ingrese tarjeta (SI/NO): "
+)
+
+
+if tarjeta.upper() == "SI":
+
+
+    print("Tarjeta reconocida")
+
+
+    # Datos del usuario
+
+    cuenta_ingresada = input(
+        "Ingrese número de cuenta: "
+    )
+
+    password_ingresada = input(
+        "Ingrese contraseña: "
+    )
+
+
+
+    # Validación del usuario
+
+    if cuenta_ingresada == numero_cuenta and password_ingresada == password:
+
+
+        print(
+            "Usuario verificado correctamente"
+        )
+
+
+
+        # -----------------------------
+        # Menú principal
+        # -----------------------------
+
+        while continuar:
+
+
+            print("\n===== MENÚ PRINCIPAL =====")
+            print("1. Consultar saldo")
+            print("2. Depositar dinero")
+            print("3. Retirar dinero")
+            print("4. Retiro sin tarjeta")
+            print("5. Transferir dinero")
+            print("6. Historial de movimientos")
+            print("7. Cambiar contraseña")
+            print("8. Pagar servicios")
+            print("9. Recargar celular")
+            print("10. Bloquear tarjeta")
+            print("11. Salir")
+
+
+            opcion = input(
+                "Seleccione una opción: "
+            )
+
+
+
+            # -----------------------------
+            # Consultar saldo
+            # -----------------------------
+
+            if opcion == "1":
+
+                print(
+                    f"Saldo actual: ${saldo}"
+                )
+
+
+
+            # -----------------------------
+            # Depositar dinero
+            # -----------------------------
+
+            elif opcion == "2":
+
+
+                monto = float(
+                    input("Monto a depositar: ")
+                )
+
+
+                if monto > 0:
+
+
+                    saldo += monto
+
+
+                    historial.append(
+                        f"Depósito: ${monto}"
+                    )
+
+
+                    print(
+                        "Depósito realizado"
+                    )
+
+                    print(
+                        f"Nuevo saldo: ${saldo}"
+                    )
+
+                    print(
+                        "Comprobante generado"
+                    )
+
+
+                else:
+
+                    print(
+                        "Monto inválido"
+                    )
+
+
+
+
+            # -----------------------------
+            # Retirar dinero
+            # -----------------------------
+
+            elif opcion == "3":
+
+
+                print(
+                    "\n===== RETIRO ====="
+                )
+
+
+                cuenta = input(
+                    "Número de cuenta: "
+                )
+
+                clave = input(
+                    "Contraseña: "
+                )
+
+
+                if cuenta == numero_cuenta and clave == password:
+
+
+                    monto = float(
+                        input("Monto a retirar: ")
+                    )
+
+
+                    if monto <= saldo:
+
+
+                        saldo -= monto
+
+
+                        historial.append(
+                            f"Retiro: ${monto}"
+                        )
+
+
+                        print(
+                            "Retiro realizado"
+                        )
+
+                        print(
+                            f"Saldo restante: ${saldo}"
+                        )
+
+                        print(
+                            "Comprobante generado"
+                        )
+
+
+                    else:
+
+                        print(
+                            "Saldo insuficiente"
+                        )
+
+
+                else:
+
+                    print(
+                        "Usuario no verificado"
+                    )
+
+
+
+
+            # -----------------------------
+            # Retiro sin tarjeta
+            # -----------------------------
+
+            elif opcion == "4":
+
+
+                print(
+                    "\n===== RETIRO SIN TARJETA ====="
+                )
+
+
+                cuenta = input(
+                    "Número de cuenta: "
+                )
+
+
+                clave = input(
+                    "Contraseña: "
+                )
+
+
+                if cuenta == numero_cuenta and clave == password:
+
+
+                    monto = float(
+                        input("Monto: ")
+                    )
+
+
+                    if monto <= saldo:
+
+
+                        saldo -= monto
+
+
+                        historial.append(
+                            f"Retiro sin tarjeta: ${monto}"
+                        )
+
+
+                        print(
+                            "Retiro realizado"
+                        )
+
+                        print(
+                            "Comprobante generado"
+                        )
+
+
+                    else:
+
+                        print(
+                            "Saldo insuficiente"
+                        )
+
+
+                else:
+
+                    print(
+                        "Datos incorrectos"
+                    )
+
+
+
+
+            # -----------------------------
+            # Transferencia
+            # -----------------------------
+
+            elif opcion == "5":
+
+
+                destino = input(
+                    "Cuenta destino: "
+                )
+
+
+                monto = float(
+                    input("Monto a transferir: ")
+                )
+
+
+                if monto <= saldo:
+
+
+                    saldo -= monto
+
+
+                    historial.append(
+                        f"Transferencia a {destino}: ${monto}"
+                    )
+
+
+                    print(
+                        "Transferencia realizada"
+                    )
+
+                    print(
+                        "Comprobante generado"
+                    )
+
+
+                else:
+
+                    print(
+                        "Saldo insuficiente"
+                    )
+
+
+
+
+            # -----------------------------
+            # Historial
+            # -----------------------------
+
+            elif opcion == "6":
+
+
+                print(
+                    "\n===== HISTORIAL ====="
+                )
+
+
+                for movimiento in historial:
+
+                    print(
+                        "-", movimiento
+                    )
+
+
+
+
+            # -----------------------------
+            # Cambiar contraseña
+            # -----------------------------
+
+            elif opcion == "7":
+
+
+                actual = input(
+                    "Contraseña actual: "
+                )
+
+
+                if actual == password:
+
+
+                    nueva = input(
+                        "Nueva contraseña: "
+                    )
+
+
+                    confirmar = input(
+                        "Confirmar contraseña: "
+                    )
+
+
+                    if nueva == confirmar:
+
+
+                        password = nueva
+
+
+                        print(
+                            "Contraseña actualizada"
+                        )
+
+
+                    else:
+
+                        print(
+                            "No coinciden"
+                        )
+
+
+                else:
+
+                    print(
+                        "Contraseña incorrecta"
+                    )
+
+
+
+
+            # -----------------------------
+            # Pagar servicios
+            # -----------------------------
+
+            elif opcion == "8":
+
+
+                servicio = input(
+                    "Servicio (Luz/Agua/Internet): "
+                )
+
+
+                monto = float(
+                    input("Valor: ")
+                )
+
+
+                if monto <= saldo:
+
+
+                    saldo -= monto
+
+
+                    historial.append(
+                        f"Pago {servicio}: ${monto}"
+                    )
+
+
+                    print(
+                        "Pago realizado"
+                    )
+
+                    print(
+                        "Comprobante generado"
+                    )
+
+
+                else:
+
+                    print(
+                        "Saldo insuficiente"
+                    )
+
+
+
+
+            # -----------------------------
+            # Recarga celular
+            # -----------------------------
+
+            elif opcion == "9":
+
+
+                celular = input(
+                    "Número celular: "
+                )
+
+
+                monto = float(
+                    input("Monto: ")
+                )
+
+
+                if monto <= saldo:
+
+
+                    saldo -= monto
+
+
+                    historial.append(
+                        f"Recarga celular {celular}: ${monto}"
+                    )
+
+
+                    print(
+                        "Recarga realizada"
+                    )
+
+
+                else:
+
+                    print(
+                        "Saldo insuficiente"
+                    )
+
+
+
+
+            # -----------------------------
+            # Bloquear tarjeta
+            # -----------------------------
+
+            elif opcion == "10":
+
+
+                print(
+                    "Tarjeta bloqueada correctamente"
+                )
+
+
+
+
+            # -----------------------------
+            # Salir
+            # -----------------------------
+
+            elif opcion == "11":
+
+
+                print(
+                    "Retire su tarjeta"
+                )
+
+                print(
+                    "Gracias por usar el cajero"
+                )
+
+
+                continuar = False
+
+
+
+
+            else:
+
+                print(
+                    "Opción incorrecta"
+                )
+
+
+
+            # -----------------------------
+            # Preguntar otra operación
+            # -----------------------------
+
+            if continuar and opcion != "11":
+
+
+                respuesta = input(
+                    "\n¿Desea realizar otra operación? (S/N): "
+                )
+
+
+                if respuesta.upper() == "N":
+
+
+                    print(
+                        "Retire su tarjeta"
+                    )
+
+                    print(
+                        "Gracias por usar el cajero"
+                    )
+
+
+                    continuar = False
+
+
+
+
+    else:
+
+
+        print(
+            "Usuario o contraseña incorrectos"
+        )
+
+
+
+else:
+
+
+    print(
+        "No se ingresó tarjeta"
+    )
