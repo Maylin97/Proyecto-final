@@ -60,5 +60,3 @@ El proyecto utiliza:
 - Listas para almacenar movimientos
 - Entrada y salida de datos
 
-
-## Archivos del proyecto
